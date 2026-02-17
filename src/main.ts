@@ -32,8 +32,8 @@ async function bootstrap() {
       callback(new Error('CORS origin not allowed'), false);
     },
   });
-  const appPortRaw = configService.get<string>('APP_PORT') ?? '3000';
+  const appPortRaw = configService.get<string>('APP_PORT') ?? '3001';
   const appPort = Number(appPortRaw);
-  await app.listen(Number.isFinite(appPort) ? appPort : 3000);
+  await app.listen(Number.isFinite(appPort) ? appPort : 3001);
 }
 bootstrap();
