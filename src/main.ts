@@ -13,7 +13,10 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
-    origin: (origin, callback) => {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allow?: boolean) => void,
+    ) => {
       if (!origin) {
         callback(null, true);
         return;
@@ -36,4 +39,4 @@ async function bootstrap() {
   const appPort = Number(appPortRaw);
   await app.listen(Number.isFinite(appPort) ? appPort : 3001, '0.0.0.0');
 }
-bootstrap();
+void bootstrap();

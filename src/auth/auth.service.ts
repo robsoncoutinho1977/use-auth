@@ -96,9 +96,16 @@ export class AuthService {
     path: string;
     maxAge?: number;
   } {
-    const domain = (
-      this.configService.get<string>('COOKIE_DOMAIN') ?? ''
+    const rawDomain = (
+      this.configService.get<string>('COOKIE_DOMAIN') ??
+      this.configService.get<string>('CORS_BASE_DOMAIN') ??
+      ''
     ).trim();
+    const domain = rawDomain
+      ? rawDomain.startsWith('.')
+        ? rawDomain
+        : `.${rawDomain}`
+      : '';
     const secure =
       (
         this.configService.get<string>('COOKIE_SECURE') ?? 'false'
