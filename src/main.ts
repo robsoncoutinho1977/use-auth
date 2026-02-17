@@ -34,6 +34,6 @@ async function bootstrap() {
   });
   const appPortRaw = configService.get<string>('APP_PORT') ?? '3001';
   const appPort = Number(appPortRaw);
-  await app.listen(Number.isFinite(appPort) ? appPort : 3001);
+  await app.listen(Number.isFinite(appPort) ? appPort : 3001, '0.0.0.0');
 }
 bootstrap();
